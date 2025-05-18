@@ -1,0 +1,1146 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Tu API REST",
+    "version": "1.0.0",
+    "description": "Documentación generada con Swagger"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3000"
+    }
+  ],
+  "paths": {
+    "/comments": {
+      "get": {
+        "summary": "Obtener todos los comentarios",
+        "tags": [
+          "Comments"
+        ],
+        "responses": {
+          "200": {
+            "description": "Lista de comentarios obtenida exitosamente",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Comment"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Crear un nuevo comentario",
+        "tags": [
+          "Comments"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CommentInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Comentario creado correctamente",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Comment"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Error de validación"
+          }
+        }
+      }
+    },
+    "/comments/{id}": {
+      "get": {
+        "summary": "Obtener un comentario por ID",
+        "tags": [
+          "Comments"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            },
+            "description": "ID del comentario"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Comentario encontrado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Comment"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "ID inválido"
+          },
+          "404": {
+            "description": "Comentario no encontrado"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Eliminar un comentario por ID",
+        "tags": [
+          "Comments"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            },
+            "description": "ID del comentario a eliminar"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Comentario eliminado correctamente"
+          },
+          "400": {
+            "description": "ID inválido"
+          },
+          "404": {
+            "description": "Comentario no encontrado"
+          }
+        }
+      }
+    },
+    "/followers": {
+      "get": {
+        "summary": "Obtener todos los followers",
+        "tags": [
+          "Followers"
+        ],
+        "responses": {
+          "200": {
+            "description": "Lista de followers obtenida exitosamente",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Follower"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Crear un nuevo follower",
+        "tags": [
+          "Followers"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FollowerInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Follower creado correctamente",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Follower"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Error de validación"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Eliminar un follower (deja de seguir)",
+        "tags": [
+          "Followers"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FollowerInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "204": {
+            "description": "Follower eliminado correctamente"
+          },
+          "400": {
+            "description": "Error de validación"
+          },
+          "404": {
+            "description": "Follower no encontrado"
+          }
+        }
+      }
+    },
+    "/followers/{followerId}": {
+      "get": {
+        "summary": "Obtener los seguidores de un follower por su ID",
+        "tags": [
+          "Followers"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "followerId",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            },
+            "description": "ID del follower para obtener a quién sigue"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Followers encontrados",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Follower"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Followers no encontrados"
+          }
+        }
+      }
+    },
+    "/post_images": {
+      "get": {
+        "summary": "Obtener todas las imágenes de posts",
+        "tags": [
+          "PostImages"
+        ],
+        "responses": {
+          "200": {
+            "description": "Lista de imágenes de posts obtenida exitosamente",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/PostImage"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Crear una nueva imagen para un post",
+        "tags": [
+          "PostImages"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PostImageInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Imagen creada correctamente",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PostImage"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Error de validación"
+          }
+        }
+      }
+    },
+    "/post_images/{id}": {
+      "get": {
+        "summary": "Obtener una imagen de post por ID",
+        "tags": [
+          "PostImages"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            },
+            "description": "ID de la imagen de post"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Imagen de post encontrada",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PostImage"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "ID inválido"
+          },
+          "404": {
+            "description": "Imagen no encontrada"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Eliminar una imagen de post por ID",
+        "tags": [
+          "PostImages"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            },
+            "description": "ID de la imagen a eliminar"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Imagen eliminada correctamente"
+          },
+          "400": {
+            "description": "ID inválido"
+          },
+          "404": {
+            "description": "Imagen no encontrada"
+          }
+        }
+      }
+    },
+    "/posts": {
+      "get": {
+        "summary": "Obtener todos los posts",
+        "tags": [
+          "Posts"
+        ],
+        "responses": {
+          "200": {
+            "description": "Lista de posts obtenida exitosamente",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Post"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Crear un nuevo post",
+        "tags": [
+          "Posts"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PostInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Post creado correctamente",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Post"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Error de validación"
+          }
+        }
+      }
+    },
+    "/posts/{id}": {
+      "get": {
+        "summary": "Obtener un post por ID",
+        "tags": [
+          "Posts"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            },
+            "description": "ID del post"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Post encontrado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Post"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "ID inválido"
+          },
+          "404": {
+            "description": "Post no encontrado"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Eliminar un post por ID",
+        "tags": [
+          "Posts"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            },
+            "description": "ID del post a eliminar"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Post eliminado correctamente"
+          },
+          "400": {
+            "description": "ID inválido"
+          },
+          "404": {
+            "description": "Post no encontrado"
+          }
+        }
+      }
+    },
+    "/postTags": {
+      "get": {
+        "summary": "Obtener todas las asociaciones post-tag",
+        "tags": [
+          "PostTags"
+        ],
+        "responses": {
+          "200": {
+            "description": "Lista de asociaciones post-tag obtenida exitosamente",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/PostTag"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Crear una nueva asociación post-tag",
+        "tags": [
+          "PostTags"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PostTagInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Asociación post-tag creada correctamente",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PostTag"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Error de validación"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Eliminar una asociación post-tag",
+        "tags": [
+          "PostTags"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PostTagInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "204": {
+            "description": "Asociación post-tag eliminada correctamente"
+          },
+          "400": {
+            "description": "Error de validación"
+          },
+          "404": {
+            "description": "Asociación no encontrada"
+          }
+        }
+      }
+    },
+    "/postTags/post/{postId}": {
+      "get": {
+        "summary": "Obtener la asociación post-tag por ID de post",
+        "tags": [
+          "PostTags"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "postId",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            },
+            "description": "ID del post"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Asociación post-tag encontrada",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PostTag"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "ID inválido"
+          },
+          "404": {
+            "description": "Asociación no encontrada"
+          }
+        }
+      }
+    },
+    "/tags": {
+      "get": {
+        "summary": "Obtener todas las etiquetas",
+        "tags": [
+          "Tags"
+        ],
+        "responses": {
+          "200": {
+            "description": "Lista de etiquetas obtenida exitosamente",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Tag"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Crear una nueva etiqueta",
+        "tags": [
+          "Tags"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TagInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Etiqueta creada correctamente",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Tag"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Error de validación"
+          }
+        }
+      }
+    },
+    "/tags/{id}": {
+      "get": {
+        "summary": "Obtener una etiqueta por ID",
+        "tags": [
+          "Tags"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            },
+            "description": "ID de la etiqueta"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Etiqueta encontrada",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Tag"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "ID inválido"
+          },
+          "404": {
+            "description": "Etiqueta no encontrada"
+          }
+        }
+      },
+      "put": {
+        "summary": "Editar una etiqueta por ID",
+        "tags": [
+          "Tags"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            },
+            "description": "ID de la etiqueta a editar"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TagInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Etiqueta actualizada correctamente",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Tag"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Error de validación o ID inválido"
+          },
+          "404": {
+            "description": "Etiqueta no encontrada"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Eliminar una etiqueta por ID",
+        "tags": [
+          "Tags"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            },
+            "description": "ID de la etiqueta a eliminar"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Etiqueta eliminada correctamente"
+          },
+          "400": {
+            "description": "ID inválido"
+          },
+          "404": {
+            "description": "Etiqueta no encontrada"
+          }
+        }
+      }
+    },
+    "/users": {
+      "get": {
+        "summary": "Obtener todos los usuarios",
+        "tags": [
+          "Users"
+        ],
+        "responses": {
+          "200": {
+            "description": "Lista de usuarios obtenida exitosamente"
+          }
+        }
+      },
+      "post": {
+        "summary": "Crear un nuevo usuario",
+        "tags": [
+          "Users"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/User"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Usuario creado correctamente"
+          },
+          "400": {
+            "description": "Error de validación"
+          }
+        }
+      }
+    },
+    "/users/{id}": {
+      "get": {
+        "summary": "Obtener un usuario por ID",
+        "tags": [
+          "Users"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            },
+            "description": "ID del usuario"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Usuario encontrado"
+          },
+          "404": {
+            "description": "Usuario no encontrado"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Eliminar un usuario por ID",
+        "tags": [
+          "Users"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            },
+            "description": "ID del usuario a eliminar"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Usuario eliminado"
+          },
+          "404": {
+            "description": "Usuario no encontrado"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Comment": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "example": 1
+          },
+          "postId": {
+            "type": "integer",
+            "example": 5
+          },
+          "author": {
+            "type": "string",
+            "example": "Juan Pérez"
+          },
+          "content": {
+            "type": "string",
+            "example": "Este es un comentario."
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2025-05-18T12:34:56Z"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2025-05-18T12:34:56Z"
+          }
+        }
+      },
+      "CommentInput": {
+        "type": "object",
+        "required": [
+          "postId",
+          "author",
+          "content"
+        ],
+        "properties": {
+          "postId": {
+            "type": "integer",
+            "example": 5
+          },
+          "author": {
+            "type": "string",
+            "example": "Juan Pérez"
+          },
+          "content": {
+            "type": "string",
+            "example": "Este es un comentario."
+          }
+        }
+      },
+      "Follower": {
+        "type": "object",
+        "properties": {
+          "followerId": {
+            "type": "integer",
+            "example": 1
+          },
+          "followedId": {
+            "type": "integer",
+            "example": 2
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2025-05-18T12:34:56Z"
+          }
+        }
+      },
+      "FollowerInput": {
+        "type": "object",
+        "required": [
+          "followerId",
+          "followedId"
+        ],
+        "properties": {
+          "followerId": {
+            "type": "integer",
+            "example": 1
+          },
+          "followedId": {
+            "type": "integer",
+            "example": 2
+          }
+        }
+      },
+      "PostImage": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "example": 5
+          },
+          "postId": {
+            "type": "integer",
+            "example": 12
+          },
+          "url": {
+            "type": "string",
+            "example": "https://example.com/image.jpg"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2025-05-18T12:34:56Z"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2025-05-18T12:34:56Z"
+          }
+        }
+      },
+      "PostImageInput": {
+        "type": "object",
+        "required": [
+          "postId",
+          "url"
+        ],
+        "properties": {
+          "postId": {
+            "type": "integer",
+            "example": 12
+          },
+          "url": {
+            "type": "string",
+            "example": "https://example.com/image.jpg"
+          }
+        }
+      },
+      "Post": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "example": 1
+          },
+          "title": {
+            "type": "string",
+            "example": "Título del post"
+          },
+          "content": {
+            "type": "string",
+            "example": "Contenido del post"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2025-05-18T12:34:56Z"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2025-05-18T12:34:56Z"
+          }
+        }
+      },
+      "PostInput": {
+        "type": "object",
+        "required": [
+          "title",
+          "content"
+        ],
+        "properties": {
+          "title": {
+            "type": "string",
+            "example": "Título del post"
+          },
+          "content": {
+            "type": "string",
+            "example": "Contenido del post"
+          }
+        }
+      },
+      "PostTag": {
+        "type": "object",
+        "properties": {
+          "postId": {
+            "type": "integer",
+            "example": 10
+          },
+          "tagId": {
+            "type": "integer",
+            "example": 3
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2025-05-18T12:34:56Z"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2025-05-18T12:34:56Z"
+          }
+        }
+      },
+      "PostTagInput": {
+        "type": "object",
+        "required": [
+          "postId",
+          "tagId"
+        ],
+        "properties": {
+          "postId": {
+            "type": "integer",
+            "example": 10
+          },
+          "tagId": {
+            "type": "integer",
+            "example": 3
+          }
+        }
+      },
+      "Tag": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "example": 1
+          },
+          "name": {
+            "type": "string",
+            "example": "Tecnología"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2025-05-18T12:34:56Z"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2025-05-18T12:34:56Z"
+          }
+        }
+      },
+      "TagInput": {
+        "type": "object",
+        "required": [
+          "name"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "example": "Tecnología"
+          }
+        }
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Comments",
+      "description": "Operaciones relacionadas con comentarios"
+    },
+    {
+      "name": "Followers",
+      "description": "Operaciones relacionadas con seguidores (followers)"
+    },
+    {
+      "name": "PostImages",
+      "description": "Operaciones relacionadas con las imágenes de los posts"
+    },
+    {
+      "name": "Posts",
+      "description": "Operaciones relacionadas con posts"
+    },
+    {
+      "name": "PostTags",
+      "description": "Operaciones relacionadas con la asociación entre posts y tags"
+    },
+    {
+      "name": "Tags",
+      "description": "Operaciones relacionadas con etiquetas (tags)"
+    },
+    {
+      "name": "Users",
+      "description": "Operaciones relacionadas con usuarios"
+    }
+  ]
+}
